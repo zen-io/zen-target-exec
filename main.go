@@ -1,9 +1,9 @@
 package own
 
 import (
-	ahoy_targets "gitlab.com/hidothealth/platform/ahoy/src/target"
+	zen_targets "github.com/zen-io/zen-core/target"
 )
 
-var KnownTargets = ahoy_targets.TargetCreatorMap{
+var KnownTargets = zen_targets.TargetCreatorMap{
 	"exec": ExecConfig{},
 }
