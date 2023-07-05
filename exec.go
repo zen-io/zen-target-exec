@@ -100,10 +100,8 @@ func (ec ExecConfig) GetTargets(tcc *zen_targets.TargetConfigContext) ([]*zen_ta
 func getCmd(scriptCmds []string) func(target *zen_targets.Target, runCtx *zen_targets.RuntimeContext) error {
 	return func(target *zen_targets.Target, runCtx *zen_targets.RuntimeContext) error {
 		target.SetStatus("Executing %s", target.Qn())
-		args := []string{
-			"-c",
-		}
 
+		args := []string{}
 		for _, cmd := range scriptCmds {
 			interpolatedCmd, err := target.Interpolate(cmd)
 			if err != nil {
@@ -111,9 +109,10 @@ func getCmd(scriptCmds []string) func(target *zen_targets.Target, runCtx *zen_ta
 			}
 			args = append(args, interpolatedCmd)
 		}
+		cmdArg := []string{"-c", strings.Join(args, " && ")}
 
-		target.Traceln("sh %s", strings.Join(args, " "))
-		cmd := exec.Command("sh", args...)
+		target.Traceln("/bin/sh '%s'", strings.Join(cmdArg, " "))
+		cmd := exec.Command("/bin/sh", cmdArg...)
 		cmd.Dir = target.Cwd
 		cmd.Env = target.GetEnvironmentVariablesList()
 		cmd.Stdout = target

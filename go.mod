@@ -2,7 +2,7 @@ module github.com/zen-io/zen-target-exec
 
 go 1.20
 
-require github.com/zen-io/zen-core v0.0.0-20230629185926-24b38b41eeb8
+require github.com/zen-io/zen-core v0.0.0-20230705085957-87141151122f
 
 require (
 	atomicgo.dev/cursor v0.1.1 // indirect
