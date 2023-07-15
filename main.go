@@ -1,4 +1,4 @@
-package own
+package exec
 
 import (
 	zen_targets "github.com/zen-io/zen-core/target"
